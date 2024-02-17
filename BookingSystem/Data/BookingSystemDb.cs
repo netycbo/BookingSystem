@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BookingSystem.Entities;
+using BookingSystem.Data.Entities;
 
 namespace BookingSystem.Data
 {
     internal class BookingSystemDb : DbContext
     {
-        public DbSet<RoomBasic> RoomBasic => Set<RoomBasic>();
-        public DbSet<RoomPremium> RoomPremium => Set<RoomPremium>();
+        public DbSet<RoomBasic> RoomsBasic => Set<RoomBasic>();
+        public DbSet<RoomPremium> RoomsPremium => Set<RoomPremium>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

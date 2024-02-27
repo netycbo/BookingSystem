@@ -1,6 +1,7 @@
 ﻿using BookingSystem.Data;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
+using System;
 using System.Linq.Expressions;
 
 public class Program
@@ -8,8 +9,9 @@ public class Program
 
     private static void Main(string[] args)
     {
-        var newBooking = new SqlRepository<RoomBasic>(new BookingSystemDb());
+        var newBooking = new RepositoryInFile<RoomBasic>();
         newBooking.RoomAdded += NewBookingRoomAdded;
+        newBooking.RoomRemoved += NewBookingRoomRemoved;
 
         bool CloseApp = false;
         while (!CloseApp)
@@ -136,11 +138,27 @@ public class Program
                     Console.WriteLine("Invalid input. Please enter a valid room ID.");
                 }
             }
-
         }
     }
+
+    private static void NewBookingRoomRemoved(object? sender, RoomBasic room)
+    {
+        DateTime dateTime = DateTime.Now;
+        Console.WriteLine($"room number {room.Id} has bean removed");
+        using (var writer = File.AppendText("logs.txt"))
+        {
+            writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and was: {(room.IsBasic ? "Premium" : "Basic")}]");
+        }
+    }
+
     private static void NewBookingRoomAdded(object? sender, RoomBasic room)
     {
+        DateTime dateTime = DateTime.Now;
         Console.WriteLine($"room number {room.Id} has bean added");
+        using (var writer = File.AppendText("logs.txt"))
+        {
+            writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and its: {(room.IsBasic ? "Premium": "Basic")}]");
+        }
+        
     }
 }

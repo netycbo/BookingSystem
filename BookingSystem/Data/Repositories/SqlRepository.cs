@@ -9,20 +9,19 @@ namespace BookingSystem.Data.Repositories
     {
         private readonly DbContext _dbContext;
         private readonly DbSet<T> _dbSet;
-        private readonly Action<T>? _roomAddedCallBack;
+        public event EventHandler<T> RoomAdded;
+        public event EventHandler<T> RoomRemoved;
 
-        public SqlRepository(DbContext dbContext, Action<T>? roomAddedCallback = null)
+        public SqlRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
-            _roomAddedCallBack = roomAddedCallback;
+            
         }
-        public event EventHandler<T>? RoomAdded;
-
+      
         public void Add(T item)
         {
             _dbSet.Add(item);
-            _roomAddedCallBack?.Invoke(item);
             RoomAdded?.Invoke(this, item);
         }
 
@@ -39,6 +38,7 @@ namespace BookingSystem.Data.Repositories
         public void Remove(T item)
         {
             _dbSet.Remove(item);
+            RoomRemoved?.Invoke(this, item);
         }
 
         public void Save()

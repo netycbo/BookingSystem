@@ -3,7 +3,7 @@ using BookingSystem.Data.Entities;
 
 namespace BookingSystem.Data
 {
-    internal class BookingSystemDb : DbContext
+    internal class BookingSystemContext : DbContext
     {
         public DbSet<RoomBasic> RoomsBasic => Set<RoomBasic>();
         public DbSet<RoomPremium> RoomsPremium => Set<RoomPremium>();

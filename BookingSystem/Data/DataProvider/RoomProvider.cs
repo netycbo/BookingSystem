@@ -18,7 +18,7 @@ namespace BookingSystem.Data.DataProvider
             Console.WriteLine("Rooms in use:");
             foreach (var room in rooms)
             {
-                Console.WriteLine($"room.ToString()+\n");
+                Console.WriteLine($"{room.ToString()} \n");
             }
         }
     }

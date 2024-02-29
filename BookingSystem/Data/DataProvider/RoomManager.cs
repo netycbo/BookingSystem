@@ -11,8 +11,11 @@ namespace BookingSystem.Data.DataProvider
         public RoomManager(IRepository<RoomBasic> room)
         {
             _roomBasicRepository = room;
-          //  _room.RoomAdded += NewBookingRoomAdded;
-          //  _room.RoomRemoved += NewBookingRoomRemoved;
+            if (_room != null)
+            {
+                _room.RoomAdded += NewBookingRoomAdded;
+                _room.RoomRemoved += NewBookingRoomRemoved;
+            }
         }
 
         public void AddRoomBasic(IRepository<RoomBasic> repository, RoomBasic room)

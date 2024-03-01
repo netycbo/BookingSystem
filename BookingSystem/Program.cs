@@ -3,6 +3,8 @@ using BookingSystem.Data;
 using BookingSystem.Data.DataProvider;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
+using BookingSystem.Data.RoomManager;
+using BookingSystem.Data.UserCommunication;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq.Expressions;

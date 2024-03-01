@@ -1,12 +1,12 @@
 ﻿using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 
-namespace BookingSystem.Data.DataProvider
+namespace BookingSystem.Data.RoomManager
 {
     public class RoomManager : IRoomManager
     {
-                private readonly IRepository<RoomBasic> _roomBasicRepository;
-        
+        private readonly IRepository<RoomBasic> _roomBasicRepository;
+
         public RoomManager(IRepository<RoomBasic> room)
         {
             _roomBasicRepository = room;

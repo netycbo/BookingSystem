@@ -1,4 +1,4 @@
-﻿namespace BookingSystem.Data.DataProvider
+﻿namespace BookingSystem.Data.UserCommunication
 {
     public class UserCommunication : IUserCommunicacion
     {
@@ -33,4 +33,3 @@
         }
     }
 }
-    

@@ -1,4 +1,4 @@
-﻿namespace BookingSystem.Data.UserCommunication
+﻿namespace BookingSystem
 {
     public class UserCommunication : IUserCommunicacion
     {

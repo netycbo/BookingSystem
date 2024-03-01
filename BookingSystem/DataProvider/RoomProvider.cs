@@ -1,7 +1,7 @@
 ﻿using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 
-namespace BookingSystem.Data.DataProvider
+namespace BookingSystem.DataProvider
 {
     public class RoomProvider : IRoomProvider
     {
@@ -22,5 +22,5 @@ namespace BookingSystem.Data.DataProvider
             }
         }
     }
-    
+
 }

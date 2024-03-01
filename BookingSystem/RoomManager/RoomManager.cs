@@ -1,7 +1,7 @@
 ﻿using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 
-namespace BookingSystem.Data.RoomManager
+namespace BookingSystem
 {
     public class RoomManager : IRoomManager
     {

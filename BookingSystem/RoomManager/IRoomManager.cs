@@ -1,12 +1,7 @@
 ﻿using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BookingSystem.Data.RoomManager
+namespace BookingSystem
 {
     public interface IRoomManager
     {

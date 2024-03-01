@@ -1,10 +1,10 @@
 ﻿using BookingSystem;
 using BookingSystem.Data;
-using BookingSystem.Data.DataProvider;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
-using BookingSystem.Data.RoomManager;
-using BookingSystem.Data.UserCommunication;
+using BookingSystem.DataProvider;
+using BookingSystem.RoomManager;
+using BookingSystem.UserCommunication;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq.Expressions;

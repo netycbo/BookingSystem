@@ -16,6 +16,7 @@ namespace BookingSystem.Data.Repositories
         void Save();
         IEnumerable<T> GetAll();
         T GetById(int id);
-
+        public event EventHandler<T>? RoomAdded;
+        public event EventHandler<T>? RoomRemoved;
     }
 }

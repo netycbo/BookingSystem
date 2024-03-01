@@ -7,6 +7,7 @@ namespace BookingSystem.Data.Repositories
     public class RepositoryInFile<T> : IRepository<T> where T : class, IInventoryBasic
     {
         private List<T> rooms = new List<T>();
+
         public event EventHandler<T>? RoomAdded;
         public event EventHandler<T>? RoomRemoved;
 

@@ -5,16 +5,15 @@ namespace BookingSystem.Data.DataProvider
 {
     public class RoomManager : IRoomManager
     {
-        private readonly RepositoryInFile<RoomBasic> _room;
-        private readonly IRepository<RoomBasic> _roomBasicRepository;
+                private readonly IRepository<RoomBasic> _roomBasicRepository;
         
         public RoomManager(IRepository<RoomBasic> room)
         {
             _roomBasicRepository = room;
-            if (_room != null)
+            if (room != null)
             {
-                _room.RoomAdded += NewBookingRoomAdded;
-                _room.RoomRemoved += NewBookingRoomRemoved;
+                room.RoomAdded += NewBookingRoomAdded;
+                room.RoomRemoved += NewBookingRoomRemoved;
             }
         }
 
@@ -70,7 +69,7 @@ namespace BookingSystem.Data.DataProvider
             Console.WriteLine($"room number {room.Id} has bean removed");
             using (var writer = File.AppendText("logs.txt"))
             {
-                writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and was: {(room.IsBasic ? "Premium" : "Basic")}]");
+                writer.WriteLine($"[{dateTime}]-RoomRemoved-[{room.Id} and was: {(room.IsBasic ? "Premium" : "Basic")}]");
             }
         }
     }

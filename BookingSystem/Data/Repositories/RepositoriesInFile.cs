@@ -19,9 +19,9 @@ namespace BookingSystem.Data.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            if (File.Exists("items.json"))
+            if (File.Exists("rooms_data.csv"))
             {
-                using (var reader = File.OpenText("items.json"))
+                using (var reader = File.OpenText("rooms_data.csv"))
                 {
                     var line = reader.ReadLine();
                     rooms = JsonSerializer.Deserialize<List<T>>(line);

@@ -1,16 +1,19 @@
 ﻿using BookingSystem.DataProvider;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
+using BookingSystem.Components.CSV_Reader;
 
 namespace BookingSystem
 {
     public class App : IApp
     {
         private readonly IRepository<RoomBasic> _roomBasicRepository;
+        private readonly ICsvReader _csvReader;
         
-        public App(IRepository<RoomBasic> roomBasicRepository)
+        public App(IRepository<RoomBasic> roomBasicRepository, ICsvReader csvReader)
         {
             _roomBasicRepository = roomBasicRepository;
+            _csvReader = csvReader;
         }
 
         public void Run()
@@ -18,7 +21,7 @@ namespace BookingSystem
             var newBooking = new RepositoryInFile<RoomBasic>();
             var roomManager = new RoomManager(newBooking);
             var userCommunication = new UserCommunication();
-            var roomProvider = new RoomProvider(newBooking);
+            var roomProvider = new RoomProvider(_csvReader);
 
 
 

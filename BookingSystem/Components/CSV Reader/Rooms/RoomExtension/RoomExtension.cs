@@ -12,7 +12,7 @@ namespace BookingSystem.Components.CSV_Reader.Rooms.Exstensions
         {
             foreach (var item in source)
             {
-                var columns =item.Split(',');
+                var columns = item.Split(',');
 
                 yield return new Room
                 {

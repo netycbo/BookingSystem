@@ -1,14 +1,17 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookingSystem.Data.Entities
 {
-    public class Restaurant
+    public  class Restaurant
     {
-       
+        
         public int Id { get; set; }
+        public int GuestId { get; set; }
+      
         public int RoomNumber { get; set; }
         public int Price { get; set; }
         public bool Breakfast { get; set; }
@@ -21,10 +24,9 @@ namespace BookingSystem.Data.Entities
         public Restaurant()
         {
         }
-
-        public Restaurant( int roomNumber, int basePrice, bool breakfast, string breakfastDescription, bool brunch, string brunchDescription, bool dinner, string dinnerDescription)
+        public Restaurant(int roomNumber, int basePrice, bool breakfast, string breakfastDescription, bool brunch, string brunchDescription, bool dinner, string dinnerDescription)
         {
-            
+
             RoomNumber = roomNumber;
             Breakfast = breakfast;
             BreakfastDescription = breakfastDescription;
@@ -32,7 +34,6 @@ namespace BookingSystem.Data.Entities
             DinnerDescription = dinnerDescription;
             Brunch = brunch;
             BrunchDescription = brunchDescription;
-            
 
             Price = basePrice;
 
@@ -51,6 +52,8 @@ namespace BookingSystem.Data.Entities
                 Price += 100;
             }
         }
+
+
         public override string ToString()
         {
             StringBuilder sb = new();

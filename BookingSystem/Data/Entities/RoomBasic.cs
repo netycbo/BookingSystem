@@ -1,15 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BookingSystem.Data.Entities
 {
     public class RoomBasic : IInventoryBasic
     {
+        [Key]
+        public int RoomId { get; set; }
+        public int GuestId { get; set; }
         
-        
-        private static int instanceCount = 0;
-        public int Id { get; set; }
         public int NumberOfBeds { get; set; }
         public bool PrivateBathroom { get; set; } = true;
         public bool Balcony { get; set; } = false;
@@ -24,21 +24,13 @@ namespace BookingSystem.Data.Entities
         public int Price { get; set; } = 100;
 
 
-        public RoomBasic()
-        {
-            instanceCount++;
-            Id = instanceCount;
-        }
-        public static int Count
-        {
-            get { return instanceCount; }
-        }
+        
 
         public override string ToString()
         {
             StringBuilder sb = new();
 
-            sb.AppendLine($"    Room Number: {Id}    Number of beds: {NumberOfBeds}");
+            sb.AppendLine($"    Room Number: {RoomId}    Number of beds: {NumberOfBeds}");
             sb.AppendLine($"    Private bathroom {(PrivateBathroom ? "yes" : "no")}  Balcony {(Balcony ? "yes" : "no")}");
             sb.AppendLine($"    Gym access {(GymAccess ? "yes" : "no")}  Pool access {(PoolAccess ? "yes" : "no")}");
             sb.AppendLine($"    Kettle {(Kettle ? "yes" : "no")}  Tv {(Tv ? "yes" : "no")}");

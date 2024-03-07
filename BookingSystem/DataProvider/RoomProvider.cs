@@ -38,14 +38,14 @@ namespace BookingSystem.DataProvider
 
             foreach (var item in topRooms)
             {
-                Console.WriteLine($"Room ID: {item.Room.Id}, Upgrades: {item.TrueCount}");
+                Console.WriteLine($", Upgrades: {item.TrueCount}");
             }
         }
         public void ShowRoomsWithNiceView()
         {
             var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
             var roomsWithNiceView = rooms.Where(r => r.GardenView && r.Balcony)
-                                          .Select(r => r.Id).ToList();
+                                          .Select(r => r.GuestId).ToList();
             if (roomsWithNiceView.Any())
             {
                 Console.WriteLine($"Rooms with nice view and balcony: {string.Join(", ", roomsWithNiceView)}");
@@ -61,7 +61,7 @@ namespace BookingSystem.DataProvider
             var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
 
             Console.WriteLine("Rooms in use:");
-            var roomsInUse = rooms.OrderBy(r => r.Id).ToList();
+            var roomsInUse = rooms.OrderBy(r => r.GuestId).ToList();
             foreach (var room in roomsInUse)
             {
                 Console.WriteLine($"{room.ToString()}\n");

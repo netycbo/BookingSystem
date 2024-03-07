@@ -16,12 +16,12 @@ namespace BookingSystem.Components.CSV_Reader.Rooms.Extension
 
                 yield return new GuestInfo
                 {
-                    
-                    Name = columns[0],
-                    Surname = columns[1],
-                    Email = columns[2],
-                    PhoneNumber = columns[3],
-                    Address = columns[4]
+                    GuestId = int.Parse(columns[0]),
+                    Name = columns[1],
+                    Surname = columns[2],
+                    Email = columns[3],
+                    PhoneNumber = columns[4],
+                    Address = columns[5]
                 };
             }
         }

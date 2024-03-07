@@ -16,18 +16,19 @@ namespace BookingSystem.Components.CSV_Reader.Rooms.Exstensions
 
                 yield return new RoomInfo
                 {
-                    
-                    NumberOfBeds = int.Parse(columns[0]),
-                    PrivateBathroom = bool.Parse(columns[1]),
-                    Balcony = bool.Parse(columns[2]),
-                    GymAccess = bool.Parse(columns[3]),
-                    PoolAccess = bool.Parse(columns[4]),
-                    Kettle = bool.Parse(columns[5]),
-                    Tv = bool.Parse(columns[6]),
-                    Tea_Coffe = bool.Parse(columns[7]),
-                    GardenView = bool.Parse(columns[8]),
-                    StreetView = bool.Parse(columns[9]),
-                    Safe = bool.Parse(columns[10])
+                    RoomId = int.Parse(columns[0]),
+                    GuestId = int.Parse(columns[1]),
+                    NumberOfBeds = int.Parse(columns[2]),
+                    PrivateBathroom = bool.Parse(columns[3]),
+                    Balcony = bool.Parse(columns[4]),
+                    GymAccess = bool.Parse(columns[5]),
+                    PoolAccess = bool.Parse(columns[6]),
+                    Kettle = bool.Parse(columns[7]),
+                    Tv = bool.Parse(columns[8]),
+                    Tea_Coffe = bool.Parse(columns[9]),
+                    GardenView = bool.Parse(columns[10]),
+                    StreetView = bool.Parse(columns[11]),
+                    Safe = bool.Parse(columns[12])
                 };
             }
         }

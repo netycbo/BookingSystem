@@ -10,7 +10,7 @@ namespace BookingSystem
     {
         private readonly BookingSystemContext _bookingSystemcontext;
         private readonly ICsvReader _csvReader;
-        
+
         public App(BookingSystemContext bookingSystemcontext, ICsvReader csvReader)
         {
             //_roomBasicRepository = roomBasicRepository;
@@ -21,45 +21,65 @@ namespace BookingSystem
 
         public void Run()
         {
-                var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
-                foreach (var room in rooms)
+            //insertData();
+        }
+
+        private void insertData()
+        {
+            var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
+            foreach (var room in rooms)
+            {
+                _bookingSystemcontext.Rooms.Add(new RoomBasic()
                 {
-                    _bookingSystemcontext.Rooms.Add(new RoomBasic()
-                    {
-                        
-                        NumberOfBeds = room.NumberOfBeds,
-                        PrivateBathroom = room.PrivateBathroom,
-                        Balcony = room.Balcony,
-                        GymAccess = room.GymAccess,
-                        PoolAccess = room.PoolAccess,
-                        Kettle = room.Kettle,
-                        Tv = room.Tv,
-                        Tea_Coffe = room.Tea_Coffe,
-                        GardenView = room.GardenView,
-                        StreetView = room.StreetView,
-                        Safe = room.Safe,
-                        Price = room.Price
-                    });
-                }
-               
-                var records = _csvReader.ReadRestaurantInfo("Resource\\restaurant_data.csv");
-                foreach (var restaurant in records)
+                    GuestId = room.GuestId,
+                    NumberOfBeds = room.NumberOfBeds,
+                    PrivateBathroom = room.PrivateBathroom,
+                    Balcony = room.Balcony,
+                    GymAccess = room.GymAccess,
+                    PoolAccess = room.PoolAccess,
+                    Kettle = room.Kettle,
+                    Tv = room.Tv,
+                    Tea_Coffe = room.Tea_Coffe,
+                    GardenView = room.GardenView,
+                    StreetView = room.StreetView,
+                    Safe = room.Safe,
+                    Price = room.Price
+                });
+            }
+
+            var records = _csvReader.ReadRestaurantInfo("Resource\\restaurant_data.csv");
+            foreach (var restaurant in records)
+            {
+                _bookingSystemcontext.Restaurant.Add(new Restaurant()
                 {
-                    _bookingSystemcontext.Restaurant.Add(new Restaurant()
-                    {
-                       
-                        Price = restaurant.Price,
-                        Breakfast = restaurant.Breakfast,
-                        BreakfastDescription = restaurant.BreakfastDescription,
-                        Brunch = restaurant.Brunch,
-                        BrunchDescription = restaurant.BrunchDescription,
-                        Dinner = restaurant.Dinner,
-                        DinnerDescription = restaurant.DinnerDescription
-                    });
-                }
-                _bookingSystemcontext.SaveChanges();
-            
+                    GuestId = restaurant.GuestId,
+                    RoomNumber = restaurant.RoomNumber,
+                    Price = restaurant.Price,
+                    Breakfast = restaurant.Breakfast,
+                    BreakfastDescription = restaurant.BreakfastDescription,
+                    Brunch = restaurant.Brunch,
+                    BrunchDescription = restaurant.BrunchDescription,
+                    Dinner = restaurant.Dinner,
+                    DinnerDescription = restaurant.DinnerDescription
+                });
+            }
+            var guests = _csvReader.ReadGuestInfo("Resource\\guest_info.csv");
+            foreach (var guest in guests)
+            {
+                _bookingSystemcontext.Guests.Add(new Guest()
+                {
+                    
+                    Name = guest.Name,
+                    Surname = guest.Surname,
+                    Email = guest.Email,
+                    PhoneNumber = guest.PhoneNumber,
+                    Address = guest.Address
+                });
+            }
+
+            _bookingSystemcontext.SaveChanges();
         }
     }
-    
 }
+    
+

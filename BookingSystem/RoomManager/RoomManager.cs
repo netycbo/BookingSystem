@@ -29,7 +29,7 @@ namespace BookingSystem
             var document = new XDocument();
             var rooms = new XElement("Rooms", records.Select(
                 x => new XElement("Room",
-                    new XAttribute("Id", x.Id),
+                    
                     new XAttribute("NumberOfBeds", x.NumberOfBeds),
                     new XAttribute("PrivateBathroom", x.PrivateBathroom),
                     new XAttribute("Balcony", x.Balcony),
@@ -59,7 +59,7 @@ namespace BookingSystem
             string input = Console.ReadLine();
             if (int.TryParse(input, out int roomId))
             {
-                var roomToDelete = repository.GetAll().FirstOrDefault(room => room.Id == roomId);
+                var roomToDelete = repository.GetAll().FirstOrDefault(room => room.RoomId == roomId);
                 if (roomToDelete != null)
                 {
                     repository.Remove(roomToDelete);
@@ -80,20 +80,20 @@ namespace BookingSystem
         public void NewBookingRoomAdded(object? sender, RoomBasic room)
         {
             DateTime dateTime = DateTime.Now;
-            Console.WriteLine($"room number {room.Id} has bean added");
+            Console.WriteLine($"room number {room.RoomId} has bean added");
             using (var writer = File.AppendText("logs.txt"))
             {
-                writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and was: ");
+                writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.RoomId} and was: ");
             }
         }
 
         public void NewBookingRoomRemoved(object? sender, RoomBasic room)
         {
             DateTime dateTime = DateTime.Now;
-            Console.WriteLine($"room number {room.Id} has bean removed");
+            Console.WriteLine($"room number {room.RoomId} has bean removed");
             using (var writer = File.AppendText("logs.txt"))
             {
-                writer.WriteLine($"[{dateTime}]-RoomRemoved-[{room.Id} and was: ");
+                writer.WriteLine($"[{dateTime}]-RoomRemoved-[{room.RoomId} and was: ");
             }
         }
     }

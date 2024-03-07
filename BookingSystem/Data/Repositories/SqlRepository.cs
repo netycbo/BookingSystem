@@ -4,40 +4,37 @@ using System;
 
 namespace BookingSystem.Data.Repositories
 {
-    
-    public class SqlRepository<T> : IRepository<T> where T : class, IInventoryBasic, new()
+    public class SqlRepository<T> : IRepository<T> where T : class, new()
     {
-        private readonly DbContext _dbContext;
-        private readonly DbSet<T> _dbSet;
+        private readonly BookingSystemContext _dbContext;
+       
         public event EventHandler<T> RoomAdded;
         public event EventHandler<T> RoomRemoved;
 
-        public SqlRepository(DbContext dbContext)
+        public SqlRepository(BookingSystemContext dbContext)
         {
             _dbContext = dbContext;
-            _dbSet = _dbContext.Set<T>();
-            
         }
       
-        public void Add(T item)
+        public void Add(T entity)
         {
-            _dbSet.Add(item);
-            RoomAdded?.Invoke(this, item);
+            _dbContext.Add(entity);
+            RoomAdded?.Invoke(this, entity);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return _dbSet.OrderBy(item => item.Id).ToList();
+            return _dbContext.Set<T>().ToList();
         }
 
         public T GetById(int id)
         {
-            return _dbSet.Find(id);
+            return _dbContext.Set<T>().Find(id);
         }
 
         public void Remove(T item)
         {
-            _dbSet.Remove(item);
+            _dbContext.Remove(item);
             RoomRemoved?.Invoke(this, item);
         }
 
@@ -48,7 +45,7 @@ namespace BookingSystem.Data.Repositories
 
         public void Update(T item)
         {
-            _dbSet.Update(item);
+            _dbContext.Update(item);
         }
     }
 

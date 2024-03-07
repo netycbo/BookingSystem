@@ -17,7 +17,7 @@ namespace BookingSystem.DataProvider
         }
         public void ShowRoomsWithUpgrades()
         {
-            var rooms = _csvReader.ReadCsv("Resource\\rooms_data.csv");
+            var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
 
             var topRooms = rooms.Select(room => new
             {
@@ -43,7 +43,7 @@ namespace BookingSystem.DataProvider
         }
         public void ShowRoomsWithNiceView()
         {
-            var rooms = _csvReader.ReadCsv("Resource\\rooms_data.csv");
+            var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
             var roomsWithNiceView = rooms.Where(r => r.GardenView && r.Balcony)
                                           .Select(r => r.Id).ToList();
             if (roomsWithNiceView.Any())
@@ -58,7 +58,7 @@ namespace BookingSystem.DataProvider
 
         public void ShowRooms()
         {
-            var rooms = _csvReader.ReadCsv("Resource\\rooms_data.csv");
+            var rooms = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
 
             Console.WriteLine("Rooms in use:");
             var roomsInUse = rooms.OrderBy(r => r.Id).ToList();

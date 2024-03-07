@@ -5,7 +5,7 @@ namespace BookingSystem
 {
     public interface IRoomManager
     {
-        void AddRoomPremium(IWritetRepository<RoomPremium> repository, RoomPremium room);
+        
         void AddRoomBasic(IRepository<RoomBasic> repository, RoomBasic room);
         void DeleteRoom(IRepository<RoomBasic> repository);
         void NewBookingRoomRemoved(object? sender, RoomBasic room);

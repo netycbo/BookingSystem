@@ -1,18 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BookingSystem.Data.Entities;
+using System.Reflection.Emit;
 
 namespace BookingSystem.Data
 {
-    internal class BookingSystemContext : DbContext
+    public class BookingSystemContext : DbContext
     {
-        public DbSet<RoomBasic> RoomsBasic => Set<RoomBasic>();
-        public DbSet<RoomPremium> RoomsPremium => Set<RoomPremium>();
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BookingSystemContext(DbContextOptions<BookingSystemContext> options) : base(options)
         {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseInMemoryDatabase(databaseName: "BookingDb");
+            
         }
+       
+        public DbSet<Guest> Guests { get; set; }
+        public DbSet<RoomBasic> Rooms { get; set; }
+        public DbSet<Restaurant> Restaurant { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+                modelBuilder.Entity<Guest>()
+                .Property(g => g.Id)
+                .ValueGeneratedOnAdd(); 
+
+                modelBuilder.Entity<RoomBasic>()
+                .Property(r => r.Id)
+                .ValueGeneratedOnAdd(); 
+
+            modelBuilder.Entity<Restaurant>()
+                .Property(r => r.Id)
+                .ValueGeneratedOnAdd(); 
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+
+
     }
-   
+
 }

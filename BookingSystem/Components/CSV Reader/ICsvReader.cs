@@ -9,6 +9,8 @@ namespace BookingSystem.Components.CSV_Reader
 {
     public interface ICsvReader
     {
-        List<Room> ReadCsv(string path);
+        List<RoomInfo> ReadRoomData(string path);
+        List<GuestInfo> ReadGuestInfo(string path);
+        List<RestaurantInfo> ReadRestaurantInfo(string path);
     }
 }

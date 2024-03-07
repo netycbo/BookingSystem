@@ -24,7 +24,7 @@ namespace BookingSystem
         }
         public void ExportToXml()
         {
-            var records = _csvReader.ReadCsv("Resource\\rooms_data.csv");
+            var records = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
 
             var document = new XDocument();
             var rooms = new XElement("Rooms", records.Select(
@@ -52,12 +52,7 @@ namespace BookingSystem
             repository.Save();
         }
 
-        public void AddRoomPremium(IWritetRepository<RoomPremium> repository, RoomPremium room)
-        {
-            repository.Add(room);
-            repository.Save();
-        }
-
+        
         public void DeleteRoom(IRepository<RoomBasic> repository)
         {
             Console.WriteLine("Room number to delete:");
@@ -88,7 +83,7 @@ namespace BookingSystem
             Console.WriteLine($"room number {room.Id} has bean added");
             using (var writer = File.AppendText("logs.txt"))
             {
-                writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and was: {(room.IsBasic ? "Premium" : "Basic")}]");
+                writer.WriteLine($"[{dateTime}]-RoomAdded-[{room.Id} and was: ");
             }
         }
 
@@ -98,7 +93,7 @@ namespace BookingSystem
             Console.WriteLine($"room number {room.Id} has bean removed");
             using (var writer = File.AppendText("logs.txt"))
             {
-                writer.WriteLine($"[{dateTime}]-RoomRemoved-[{room.Id} and was: {(room.IsBasic ? "Premium" : "Basic")}]");
+                writer.WriteLine($"[{dateTime}]-RoomRemoved-[{room.Id} and was: ");
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace BookingSystem.Data.Repositories
 {
-    public interface IWritetRepository<in T> where T : class, IInventoryBasic
+    public interface IWritetRepository<in T> where T : class, new()
     {
         void Add(T item);
         void Remove(T item);

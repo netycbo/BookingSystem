@@ -38,6 +38,11 @@ namespace BookingSystem.Data.Repositories
             RoomRemoved?.Invoke(this, item);
         }
 
+        public void Update()
+        {
+            _dbContext.SaveChanges();
+        }
+
         public void Save()
         {
             _dbContext.SaveChanges();

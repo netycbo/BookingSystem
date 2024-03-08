@@ -13,6 +13,7 @@ namespace BookingSystem.Data.Repositories
     {
         void Add(T item);
         void Remove(T item);
+        void Update();
         void Save();
         IEnumerable<T> GetAll();
         T GetById(int id);

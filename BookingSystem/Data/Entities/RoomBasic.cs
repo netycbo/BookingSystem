@@ -6,10 +6,9 @@ namespace BookingSystem.Data.Entities
 {
     public class RoomBasic : IInventoryBasic
     {
-        [Key]
-        public int RoomId { get; set; }
-        public int GuestId { get; set; }
         
+        public int RoomId { get; set; }
+     
         public int NumberOfBeds { get; set; }
         public bool PrivateBathroom { get; set; } = true;
         public bool Balcony { get; set; } = false;
@@ -21,9 +20,6 @@ namespace BookingSystem.Data.Entities
         public bool GardenView { get; set; } = false;
         public bool StreetView { get; set; } = false;
         public bool Safe { get; set; } = false;
-        public int Price { get; set; } = 100;
-
-
         
 
         public override string ToString()

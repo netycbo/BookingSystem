@@ -4,6 +4,7 @@ using BookingSystem.Data;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 using BookingSystem.DataProvider;
+using BookingSystem.RoomManagment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +18,7 @@ service.AddSingleton<IRoomManager, RoomManager>();
 service.AddSingleton<IRoomProvider, RoomProvider>();
 service.AddSingleton<IUserCommunicacion, UserCommunication>();
 service.AddSingleton<ICsvReader, CsvReader>();
+service.AddSingleton<IRepository<RoomBasic>, SqlRepository<RoomBasic>>();
 service.AddDbContext<BookingSystemContext>(options => options
 .UseSqlServer("Data Source=LAPTOP-5N54V80V\\SQLEXPRESS;Initial Catalog=BookingSystemStorage;Integrated Security=True;Trust Server Certificate=True"));
 

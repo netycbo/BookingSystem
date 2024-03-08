@@ -11,9 +11,9 @@ namespace BookingSystem.Data
             
         }
        
-        public DbSet<Guest> Guests { get; set; }
+        
         public DbSet<RoomBasic> Rooms { get; set; }
-        public DbSet<Restaurant> Restaurant { get; set; }
+        
         
         
     }

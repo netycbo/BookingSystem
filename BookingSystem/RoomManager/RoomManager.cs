@@ -5,66 +5,90 @@ using System.Formats.Asn1;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 
-namespace BookingSystem
+namespace BookingSystem.RoomManagment
 {
     public class RoomManager : IRoomManager
     {
         private readonly IRepository<RoomBasic> _roomBasicRepository;
-        private readonly ICsvReader _csvReader;
 
-        public RoomManager( ICsvReader csvReader)
-        {
-            _csvReader = csvReader;
-            //_roomBasicRepository = room;
-            //if (room != null)
-            //{
-            //    room.RoomAdded += NewBookingRoomAdded;
-            //    room.RoomRemoved += NewBookingRoomRemoved;
-            // }
-        }
-        public void ExportToXml()
-        {
-            var records = _csvReader.ReadRoomData("Resource\\rooms_data.csv");
 
-            var document = new XDocument();
-            var rooms = new XElement("Rooms", records.Select(
-                x => new XElement("Room",
-                    
-                    new XAttribute("NumberOfBeds", x.NumberOfBeds),
-                    new XAttribute("PrivateBathroom", x.PrivateBathroom),
-                    new XAttribute("Balcony", x.Balcony),
-                    new XAttribute("GymAccess", x.GymAccess),
-                    new XAttribute("PoolAccess", x.PoolAccess),
-                    new XAttribute("Kettle", x.Kettle),
-                    new XAttribute("Tv", x.Tv),
-                    new XAttribute("TeaCoffe", x.Tea_Coffe),
-                    new XAttribute("GardenView", x.GardenView),
-                    new XAttribute("StreetView", x.StreetView),
-                    new XAttribute("Safe", x.Safe))));
-            document.Add(rooms);
-            document.Save("Rooms.xml");
-            Console.WriteLine("Rooms.xml created successfully.");
+        public RoomManager(IRepository<RoomBasic> room)
+        {
+            _roomBasicRepository = room;
         }
 
-        public void AddRoomBasic(IRepository<RoomBasic> repository, RoomBasic room)
+        public void AddRoomBasic(RoomBasic room)
         {
-            repository.Add(room);
-            repository.Save();
+            _roomBasicRepository.Add(room);
+            _roomBasicRepository.Save();
         }
 
-        
-        public void DeleteRoom(IRepository<RoomBasic> repository)
+        public void UpdateRoomBasic()
+        {
+            _roomBasicRepository.Update();
+        }
+
+        public void FindRoomToUpgrade(int roomId)
+        {
+            var roomToUpgrade = _roomBasicRepository.GetAll().FirstOrDefault(room => room.RoomId == roomId);
+            if (roomToUpgrade != null)
+            {
+                Console.WriteLine($"Room with ID: {roomId} has folowing details.");
+                foreach (var property in roomToUpgrade.GetType().GetProperties())
+                {
+                    Console.WriteLine($"{property.Name}: {property.GetValue(roomToUpgrade)}");
+                }
+                Console.WriteLine("Chose one of the following to upgrades:");
+                var propertiesToUpgrade = roomToUpgrade.GetType().GetProperties()
+            .Where(p => p.PropertyType == typeof(bool) && (bool)p.GetValue(roomToUpgrade) == false)
+            .ToList();
+
+                if (propertiesToUpgrade.Count > 0)
+                {
+                    int optionNumber = 1;
+                    foreach (var property in propertiesToUpgrade)
+                    {
+                        Console.WriteLine($"{optionNumber}. {property.Name}");
+                        optionNumber++;
+                    }
+
+                    Console.WriteLine("Enter the number of the feature you want to upgrade:");
+                    var userChoice = Console.ReadLine();
+                    int choice;
+                    if (int.TryParse(userChoice, out choice) && choice >= 1 && choice <= propertiesToUpgrade.Count)
+                    {
+                        var selectedProperty = propertiesToUpgrade[choice - 1];
+                        
+                        selectedProperty.SetValue(roomToUpgrade, true);
+                        Console.WriteLine($"{selectedProperty.Name} has been upgraded.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice. Please select a valid option.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No upgrades needed or applicable for this room.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Room with ID: {roomId} was not found.");
+            }
+        }
+        public void DeleteRoom(int roomId)
         {
             Console.WriteLine("Room number to delete:");
             string input = Console.ReadLine();
-            if (int.TryParse(input, out int roomId))
+            if (int.TryParse(input, out int Id))
             {
-                var roomToDelete = repository.GetAll().FirstOrDefault(room => room.RoomId == roomId);
+                var roomToDelete = _roomBasicRepository.GetAll().FirstOrDefault(room => room.RoomId == Id);
                 if (roomToDelete != null)
                 {
-                    repository.Remove(roomToDelete);
-                    repository.Save();
-                    Console.WriteLine($"Room with ID: {roomId} has been deleted.");
+                    _roomBasicRepository.Remove(roomToDelete);
+                    _roomBasicRepository.Save();
+                    Console.WriteLine($"Room with ID: {Id} has been deleted.");
                 }
                 else
                 {

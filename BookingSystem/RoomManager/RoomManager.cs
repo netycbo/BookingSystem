@@ -33,15 +33,11 @@ namespace BookingSystem.RoomManagment
             var roomToUpgrade = _roomBasicRepository.GetAll().FirstOrDefault(room => room.RoomId == roomId);
             if (roomToUpgrade != null)
             {
-                Console.WriteLine($"Room with ID: {roomId} has folowing details.");
-                foreach (var property in roomToUpgrade.GetType().GetProperties())
-                {
-                    Console.WriteLine($"{property.Name}: {property.GetValue(roomToUpgrade)}");
-                }
-                Console.WriteLine("Chose one of the following to upgrades:");
+                Console.WriteLine($"Room with ID: {roomId} has the following details needing upgrade:");
+
                 var propertiesToUpgrade = roomToUpgrade.GetType().GetProperties()
-            .Where(p => p.PropertyType == typeof(bool) && (bool)p.GetValue(roomToUpgrade) == false)
-            .ToList();
+                    .Where(prop => prop.PropertyType == typeof(bool) && (bool)prop.GetValue(roomToUpgrade) == false)
+                    .ToList();
 
                 if (propertiesToUpgrade.Count > 0)
                 {
@@ -52,20 +48,39 @@ namespace BookingSystem.RoomManagment
                         optionNumber++;
                     }
 
-                    Console.WriteLine("Enter the number of the feature you want to upgrade:");
-                    var userChoice = Console.ReadLine();
-                    int choice;
-                    if (int.TryParse(userChoice, out choice) && choice >= 1 && choice <= propertiesToUpgrade.Count)
+                    string userChoice;
+                    do
                     {
-                        var selectedProperty = propertiesToUpgrade[choice - 1];
-                        
-                        selectedProperty.SetValue(roomToUpgrade, true);
-                        Console.WriteLine($"{selectedProperty.Name} has been upgraded.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice. Please select a valid option.");
-                    }
+                        Console.WriteLine("Enter the number of the feature you want to upgrade or press E to exit:");
+                        userChoice = Console.ReadLine();
+
+                        if (userChoice.ToUpper() == "E")
+                        {
+                            break;
+                        }
+
+                        int choice;
+                        if (int.TryParse(userChoice, out choice) && choice >= 1 && choice <= propertiesToUpgrade.Count)
+                        {
+                            var selectedProperty = propertiesToUpgrade[choice - 1];
+                            selectedProperty.SetValue(roomToUpgrade, true);
+                            Console.WriteLine($"{selectedProperty.Name} has been upgraded.");
+
+                            propertiesToUpgrade = roomToUpgrade.GetType().GetProperties()
+                                .Where(prop => prop.PropertyType == typeof(bool) && (bool)prop.GetValue(roomToUpgrade) == false)
+                                .ToList();
+                            optionNumber = 1;
+                            foreach (var property in propertiesToUpgrade)
+                            {
+                                Console.WriteLine($"{optionNumber}. {property.Name}");
+                                optionNumber++;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid choice. Please select a valid option.");
+                        }
+                    } while (userChoice.ToUpper() != "E");
                 }
                 else
                 {

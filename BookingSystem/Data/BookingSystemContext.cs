@@ -11,10 +11,7 @@ namespace BookingSystem.Data
             
         }
        
-        
         public DbSet<RoomBasic> Rooms { get; set; }
-        
-        
         
     }
 

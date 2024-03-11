@@ -7,5 +7,6 @@ namespace BookingSystem
     {
         int GetValueFromUser();
         bool GetUpgrades();
+        void UserInterface();
     }
 }

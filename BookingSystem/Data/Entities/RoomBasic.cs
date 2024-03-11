@@ -6,9 +6,9 @@ namespace BookingSystem.Data.Entities
 {
     public class RoomBasic : IInventoryBasic
     {
-        
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoomId { get; set; }
-     
         public int NumberOfBeds { get; set; }
         public bool PrivateBathroom { get; set; } = true;
         public bool Balcony { get; set; } = false;
@@ -21,12 +21,11 @@ namespace BookingSystem.Data.Entities
         public bool StreetView { get; set; } = false;
         public bool Safe { get; set; } = false;
         
-
         public override string ToString()
         {
             StringBuilder sb = new();
 
-            sb.AppendLine($"    Room Number: {RoomId}    Number of beds: {NumberOfBeds}");
+            sb.AppendLine($"    Room Number: {RoomId} Number of beds: {NumberOfBeds}");
             sb.AppendLine($"    Private bathroom {(PrivateBathroom ? "yes" : "no")}  Balcony {(Balcony ? "yes" : "no")}");
             sb.AppendLine($"    Gym access {(GymAccess ? "yes" : "no")}  Pool access {(PoolAccess ? "yes" : "no")}");
             sb.AppendLine($"    Kettle {(Kettle ? "yes" : "no")}  Tv {(Tv ? "yes" : "no")}");

@@ -8,6 +8,8 @@ namespace BookingSystem.RoomManagment
 
         void AddRoomBasic(RoomBasic room);
         void DeleteRoom(int roomId);
+        void FindRoomToUpgrade(int roomId);
+        void UpdateRoomBasic();
         void NewBookingRoomRemoved(object? sender, RoomBasic room);
         void NewBookingRoomAdded(object? sender, RoomBasic room);
     }

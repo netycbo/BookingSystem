@@ -1,4 +1,4 @@
-﻿using BookingSystem.Components.CSV_Reader.Rooms;
+﻿using BookingSystem.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace BookingSystem.Components.CSV_Reader
 {
     public interface ICsvReader
     {
-        List<RoomInfo> ReadRoomData(string path);
+        List<RoomBasic> ReadRoomData(string path);
         
     }
 }

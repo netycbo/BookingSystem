@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingSystem.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,13 @@ namespace BookingSystem.Components.CSV_Reader.Rooms.Exstensions
 {
     public static class RoomExtensions
     {
-        public static IEnumerable<RoomInfo> ToRoom(this IEnumerable<string> source)
+        public static IEnumerable<RoomBasic> ToRoom(this IEnumerable<string> source)
         {
             foreach (var item in source)
             {
                 var columns = item.Split(',');
 
-                yield return new RoomInfo
+                yield return new RoomBasic
                 {
                     RoomId = int.Parse(columns[0]),
                     

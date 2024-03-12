@@ -1,9 +1,9 @@
-﻿using BookingSystem.Data.Entities;
+﻿using BookingSystem.ApplicationServices.DataProvider;
+using BookingSystem.ApplicationServices.RoomManager;
+using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
-using BookingSystem.DataProvider;
-using BookingSystem.RoomManagment;
 
-namespace BookingSystem
+namespace BookingSystem.ApplicationServices.UserCommunication
 {
     public class UserCommunication : IUserCommunicacion
     {
@@ -22,7 +22,7 @@ namespace BookingSystem
 
             bool closeApp = false;
             while (!closeApp)
-            
+
             {
                 Console.WriteLine("1 - Add new room\n" +
                                   "2 - Add upgrades to existing room\n" +
@@ -50,7 +50,7 @@ namespace BookingSystem
                         room.Safe = GetUpgrades();
                         Console.WriteLine("Do you want to have a garden view? yes/no");
                         room.GardenView = GetUpgrades();
-                        
+
 
                         _roomManager.AddRoomBasic(room);
                         Console.WriteLine($"Current setup of your choice is: {room.ToString()}");
@@ -104,16 +104,16 @@ namespace BookingSystem
         public int GetValueFromUser()
         {
             int value = 0;
-            while (true) 
+            while (true)
             {
                 Console.Write("You can choose maximum 6 beds per room. Enter number: ");
                 string input = Console.ReadLine();
 
                 if (int.TryParse(input, out value))
                 {
-                    if (value >= 1 && value <= 6) 
+                    if (value >= 1 && value <= 6)
                     {
-                        return value; 
+                        return value;
                     }
                     else
                     {

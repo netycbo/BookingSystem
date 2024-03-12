@@ -6,11 +6,11 @@ using BookingSystem.Components.CSV_Reader.Rooms;
 using Microsoft.EntityFrameworkCore;
 using BookingSystem.Data;
 
-namespace BookingSystem.DataProvider
+namespace BookingSystem.ApplicationServices.DataProvider
 {
-    public  class RoomProvider : IRoomProvider
+    public class RoomProvider : IRoomProvider
     {
-       
+
         private readonly IRepository<RoomBasic> _roomRepository;
         private readonly ICsvReader _csvReader;
 

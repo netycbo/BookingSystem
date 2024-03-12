@@ -1,10 +1,11 @@
-﻿using BookingSystem;
+﻿using BookingSystem.ApplicationServices.DataProvider;
+using BookingSystem.ApplicationServices.RoomManager;
+using BookingSystem.ApplicationServices.UserCommunication;
 using BookingSystem.Components.CSV_Reader;
 using BookingSystem.Data;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
-using BookingSystem.DataProvider;
-using BookingSystem.RoomManagment;
+using BookingSystem.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;

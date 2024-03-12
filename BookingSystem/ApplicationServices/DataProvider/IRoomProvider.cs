@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.DataProvider
+namespace BookingSystem.ApplicationServices.DataProvider
 {
     public interface IRoomProvider
     {

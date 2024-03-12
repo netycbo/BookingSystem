@@ -5,7 +5,7 @@ using System.Formats.Asn1;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 
-namespace BookingSystem.RoomManagment
+namespace BookingSystem.ApplicationServices.RoomManager
 {
     public class RoomManager : IRoomManager
     {

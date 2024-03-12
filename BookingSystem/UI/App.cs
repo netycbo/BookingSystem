@@ -1,11 +1,12 @@
-﻿using BookingSystem.DataProvider;
+﻿using BookingSystem.ApplicationServices.DataProvider;
 using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 using BookingSystem.Components.CSV_Reader;
 using BookingSystem.Data;
-using BookingSystem.RoomManagment;
 
-namespace BookingSystem
+using BookingSystem.ApplicationServices.UserCommunication;
+
+namespace BookingSystem.UI
 {
     public class App : IApp
     {
@@ -13,9 +14,9 @@ namespace BookingSystem
         private readonly IRepository<RoomBasic> _roomRepository;
         private readonly IUserCommunicacion _userCommunication;
 
-        public App(BookingSystemContext bookingSystemcontext, IRepository<RoomBasic> roomBasicRepository,IUserCommunicacion userCommunication)
+        public App(BookingSystemContext bookingSystemcontext, IRepository<RoomBasic> roomBasicRepository, IUserCommunicacion userCommunication)
         {
-            
+
             _roomRepository = roomBasicRepository;
             _bookingSystemcontext = bookingSystemcontext;
             _userCommunication = userCommunication;
@@ -24,10 +25,10 @@ namespace BookingSystem
 
         public void Run()
         {
-            
+
             _userCommunication.UserInterface();
         }
     }
 }
-    
+
 

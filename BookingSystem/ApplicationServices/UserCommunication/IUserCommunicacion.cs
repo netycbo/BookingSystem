@@ -1,7 +1,7 @@
 ﻿using BookingSystem.Data.Entities;
 using BookingSystem.Data.Repositories;
 
-namespace BookingSystem
+namespace BookingSystem.ApplicationServices.UserCommunication
 {
     public interface IUserCommunicacion
     {
